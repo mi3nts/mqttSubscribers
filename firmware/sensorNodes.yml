@@ -1,0 +1,18 @@
+
+nodes:
+  - 001e0610c2e7
+
+
+sensors:
+  - 2B-BC
+  - 2B-NOX
+  - 2B-O3
+  - GPSGPGGA1
+  - GPSGPGGA2 
+  - GPSGPGGA3
+  - GPSGPRMC1
+  - GPSGPRMC2
+  - GPSGPRMC3
+  - GPSRaw
+  - LICOR
+  - NP2
