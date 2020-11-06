@@ -19,10 +19,8 @@ def findMacAddress():
     return "xxxxxxxx"
 
 
-
-dataFolderReference       = "/home/teamlary/mintsData/reference"
+# Change Accordingly  
 dataFolderMQTTReference   = "/home/teamlary/mintsData/referenceMQTT"
-dataFolder                = "/home/teamlary/mintsData/raw"
 dataFolderMQTT            = "/home/teamlary/mintsData/rawMQTT"
 
 
@@ -48,3 +46,5 @@ print("MQTT Credentials File      : {0}".format(mqttCredentialsFile))
 print("MQTT Broker and Port       : {0}, {1}".format(mqttOn,mqttPort))
 print("Sensor Nodes File          : {0}".format(sensorNodesFile))
 
+dataFolder                = "/home/teamlary/mintsData/raw"
+dataFolderReference       = "/home/teamlary/mintsData/reference"

@@ -11,8 +11,8 @@ from mintsXU4 import mintsDefinitions as mD
 
 import ssl
 
-dataFolder          = mD.dataFolder
-dataFolderReference = mD.dataFolderReference
+# dataFolder          = mD.dataFolder
+# dataFolderReference = mD.dataFolderReference
 macAddress          = mD.macAddress
 mqttPort            = mD.mqttPort
 mqttBroker          = mD.mqttBroker
