@@ -13,6 +13,7 @@ import json
 import ssl
 from mintsXU4 import mintsSensorReader as mSR
 from mintsXU4 import mintsDefinitions as mD
+from mintsXU4 import mintsLatest as mL
 
 
 mqttPort            = mD.mqttPort
@@ -31,7 +32,7 @@ mqttUN       = credentials['mqtt']['username']
 mqttPW       = credentials['mqtt']['password'] 
 transmitters = transmitDetail['nodes']
 sensors      = transmitDetail['sensors']
-tlsCert     = "/etc/ssl/certs/ca-certificates.crt"  # Put here the path of your TLS cert
+tlsCert     = "ca-certificates.crt"  # Put here the path of your TLS cert
 decoder = json.JSONDecoder(object_pairs_hook=collections.OrderedDict)
 
 # The callback for when the client receives a CONNACK response from the server.
@@ -54,13 +55,17 @@ def on_message(client, userdata, msg):
     # print(msg.topic+":"+str(msg.payload))
     [nodeID,sensorID ] = msg.topic.split('/')
     sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
-    dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S.%f')
+    if sensorID== "FRG001":
+        dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S')
+    else:
+        dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S.%f')
     writePath = mSR.getWritePathMQTTReference(nodeID,sensorID,dateTime)
     exists    = mSR.directoryCheck(writePath)
     sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
     print("Writing MQTT Data")
     print(writePath)
     mSR.writeCSV2(writePath,sensorDictionary,exists)
+    mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
     print("Node ID   :" + nodeID)
     print("Sensor ID :" + sensorID)
     print("Data      : " + str(sensorDictionary))

@@ -1,6 +1,7 @@
 
 nodes:
   - 001e0610c2e7
+  - 0001c0231d43
 
 
 sensors:
@@ -16,3 +17,5 @@ sensors:
   - GPSRaw
   - LICOR
   - NP2
+  - FRG001
+

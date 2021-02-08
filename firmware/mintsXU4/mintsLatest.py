@@ -13,10 +13,14 @@ import ssl
 
 # dataFolder          = mD.dataFolder
 # dataFolderReference = mD.dataFolderReference
+
 macAddress          = mD.macAddress
 mqttPort            = mD.mqttPort
 mqttBroker          = mD.mqttBroker
+dataFolderMQTT = mD.dataFolderMQTT
 mqttCredentialsFile = mD.mqttCredentialsFile
+dataFolderMQTTReference = mD.dataFolderMQTTReference
+
 
 # FOR MQTT 
 credentials = yaml.load(open(mqttCredentialsFile))
@@ -95,6 +99,15 @@ def writeJSONLatest(sensorDictionary,sensorName):
     except:
         print("Json Data Not Written")
 
+def writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID):
+    directoryIn  = dataFolderMQTTReference+"/"+nodeID+"/"+sensorID+".json"
+    print(directoryIn)
+    try:
+        with open(directoryIn,'w') as fp:
+            json.dump(sensorDictionary, fp)
+    except:
+        print("Json Data Not Written")
+
 def writeJSONLatestReference(sensorDictionary,sensorName):
     directoryIn  = dataFolderReference+"/"+macAddress+"/"+sensorName+".json"
     print(directoryIn)
@@ -118,4 +131,19 @@ def readJSONLatestAll(sensorName):
     except:
         print("Data Conflict!")
         return "NaN", False
+        
+
+def readJSONLatestAllMQTT(nodeID,sensorID):
+    directoryIn  = dataFolderMQTTReference+"/"+nodeID+"/"+sensorID+".json"
+    try:
+        with open(directoryIn, 'r') as myfile:
+            # dataRead=myfile.read()
+            dataRead=json.load(myfile)
+
+        time.sleep(0.01)
+        return dataRead, True;
+    except:
+        print("Data Conflict!")
+        return "NaN", False
+
 
