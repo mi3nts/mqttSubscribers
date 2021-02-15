@@ -1,42 +1,30 @@
-from PyQt5 import QtWidgets, QtCore
-from pyqtgraph import PlotWidget, plot
+import numpy as np
 import pyqtgraph as pg
-import sys  # We need sys so that we can pass argv to QApplication
-import os
-from random import randint
+from pyqtgraph.Qt import QtCore, QtGui
+from datetime import datetime
 
-class MainWindow(QtWidgets.QMainWindow):
 
-    def __init__(self, *args, **kwargs):
-        super(MainWindow, self).__init__(*args, **kwargs)
+class TimeAxisItem(pg.AxisItem):
+    def tickStrings(self, values, scale, spacing):
+        return [datetime.fromtimestamp(value) for value in values]
 
-        self.graphWidget = pg.PlotWidget()
-        self.setCentralWidget(self.graphWidget)
+list_x = [datetime(2018, 3, 1, 9, 36, 50, 136415), 
+        datetime(2018, 3, 1, 9, 36, 51, 330912),
+        datetime(2018, 3, 1, 9, 36, 51, 382815),
+        datetime(2018, 3, 1, 9, 36, 52, 928818)]
 
-        self.x = list(range(100))  # 100 time points
-        self.y = [randint(0,100) for _ in range(100)]  # 100 data points
+list_y = [10, 9, 12, 11]
 
-        self.graphWidget.setBackground('w')
+app = QtGui.QApplication([])
 
-        pen = pg.mkPen(color=(255, 0, 0))
-        self.data_line =  self.graphWidget.plot(self.x, self.y, pen=pen)
-        # ... init continued ...
-        self.timer = QtCore.QTimer()
-        self.timer.setInterval(50)
-        self.timer.timeout.connect(self.update_plot_data)
-        self.timer.start()
+date_axis = TimeAxisItem(orientation='bottom')
+graph     = pg.PlotWidget(axisItems = {'bottom': date_axis})
+x=[x.timestamp() for x in list_x]
+print(x)
+graph.plot(x=[x.timestamp() for x in list_x], y=list_y, pen=None, symbol='o')
+graph.show()
 
-    def update_plot_data(self):
-
-        self.x = self.x[1:]  # Remove the first y element.
-        self.x.append(self.x[-1] + 1)  # Add a new value 1 higher than the last.
-
-        self.y = self.y[1:]  # Remove the first 
-        self.y.append( randint(0,100))  # Add a new random value.
-
-        self.data_line.setData(self.x, self.y)  # Update the data.
-
-app = QtWidgets.QApplication(sys.argv)
-w = MainWindow()
-w.show()
-sys.exit(app.exec_())
+if __name__ == '__main__':
+    import sys
+    if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
+        QtGui.QApplication.instance().exec_()

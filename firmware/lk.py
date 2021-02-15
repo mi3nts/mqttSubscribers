@@ -48,22 +48,14 @@ class Graph:
         self.curve3 = self.p1.plot()
         self.curve4 = self.p1.plot()
         self.p1.showGrid(x=True, y=True)
-        
-        # Legend 
-        self.legend = pg.LegendItem(offset=(0., .5))
-       
         self.legend.setParentItem(self.p1.graphicsItem())
         self.legend.addItem(self.curve1, 'PM 1')
         self.legend.addItem(self.curve2, 'PM 2.5')
         self.legend.addItem(self.curve3, 'PM 4')
-        self.legend.addItem(self.curve4, 'PM 10')
-
-        # self.p1.setLabel('left', "PM Levels", units='μg/m3')
-        # self.p1.setLabel(axis='bottom','Date Time (UTC)',units='Date Time (UTC)')
-        self.p1.setLabels(
-            left="PM Levels (μg/m3)",
-            bottom="Date Time (UTC)") 
-        # self.p1.addLegend(size=(110, 0) ,offset=(10, 230))
+        self.legend.addItem(self.curve3, 'PM 10')
+        self.p1.setLabel('left', "PM Levels", units='μg/m3')
+        self.p1.setLabel(axis='bottom',text='Date Time (UTC)')
+        self.p1.addLegend(size=(110, 0) ,offset=(10, 230))
       
         graphUpdateSpeedMs = 1000
         timer = QtCore.QTimer()#to create a thread that calls a function at intervals
