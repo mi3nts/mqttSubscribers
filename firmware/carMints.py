@@ -23,12 +23,13 @@ class Graph:
     
         self.win                 = pg.GraphicsWindow( title="MINTS Ground Vehicle")
         self.app                 = QtGui.QApplication([])
+        self.lookBack            = timedelta(minutes=5) 
         graphUpdateSpeedMs = 250
          
         ###Frog Graphs
         
         ## Init Frog
-        self.initRunFrog = True
+        self.initRun_frog = True
 
         ## Frog Data 
         self.pm1_frog            = []
@@ -69,10 +70,11 @@ class Graph:
         self.legendHist_frog.addItem(self.curveHistogram_frog, 'Histogram Bins')
 
         self.win.nextRow()
-         ### 2BNO- Graphs
+
+        ### 2BNO- Graphs
         
         ## Init 2bNOx
-        self.initRun2bno = True
+        self.initRun_2bno = True
 
         ## 2bno Data 
         self.no_2bno             = []
@@ -134,7 +136,7 @@ class Graph:
         
         ## 2bo3 Plot 
         self.p1_2bo3       = self.win.addPlot(axisItems= {'bottom': TimeAxisItem(orientation='bottom')},title="2B Ozone Measurment")
-        self.curveBC_2bo3  = self.p1_2bo3.plot()
+        self.curveO3_2bo3  = self.p1_2bo3.plot()
         
         self.p1_2bo3.showGrid(x=True, y=True)
         self.p1_2bo3.setLabels(
@@ -142,9 +144,9 @@ class Graph:
             bottom="Date Time (Local Time)") 
 
         # Legend 
-        self.legendBC_2bo3 = pg.LegendItem(offset=(0., .5))
-        self.legendBC_2bo3.setParentItem(self.p1_2bo3.graphicsItem())
-        self.legendBC_2bo3.addItem(self.curveBC_2bo3, 'Ozone')
+        self.legendO3_2bo3 = pg.LegendItem(offset=(0., .5))
+        self.legendO3_2bo3.setParentItem(self.p1_2bo3.graphicsItem())
+        self.legendO3_2bo3.addItem(self.curveO3_2bo3, 'Ozone')
        
 
 
@@ -152,7 +154,7 @@ class Graph:
         ###Licor Graphs
 
         ## Init Licor
-        self.initRunLicor = True
+        self.initRun_licor = True
 
         ## Licor Data 
         self.co2_licor           = []
@@ -190,14 +192,14 @@ class Graph:
         
         ###Partector Graphs
 
-        ## Init 2BO3
+        ## Init Np2
         self.initRun_np2 = True
 
-        ## 2bo3 Data 
+        ## Np2 Data 
         self.np_np2            = []
         self.dateTime_np2      = []
         
-        ## 2bo3 Plot 
+        ## Np2 Plot 
         self.p1_np2       = self.win.addPlot(axisItems= {'bottom': TimeAxisItem(orientation='bottom')},title="Naneos Partector Measurment")
         self.curveNP_np2  = self.p1_np2.plot()
         
@@ -221,7 +223,7 @@ class Graph:
 
     def recursivePoper_frog(self):
 
-        if self.dateTime_frog[0] < self.currentTime - timedelta(minutes=10) :
+        if self.dateTime_frog[0] < self.currentTime - self.lookBack  :
             self.pm1_frog.pop(0) #remove oldest
             self.pm2_5_frog.pop(0) #remove oldest
             self.pm4_frog.pop(0) #remove oldest
@@ -281,9 +283,9 @@ class Graph:
                         float(dataIn['binCount90']),float(dataIn['binCount91']) ,float(dataIn['binCount92']),float(dataIn['binCount93'])]
         self.ctNow_frog =  datetime.strptime(dataIn['dateTime'],'%Y-%m-%d %H:%M:%S').replace(tzinfo=tz.tzutc()).astimezone(tz.gettz())
 
-        if self.initRunFrog:
+        if self.initRun_frog:
             if (self.pm1Now_frog>0.00):
-                    self.initRunFrog = False
+                    self.initRun_frog = False
                     self.frogUpdater()
         else: 
             if (self.pm1Now_frog>0.00 and self.ctNow_frog>self.dateTime_frog[-1] ):
@@ -295,7 +297,7 @@ class Graph:
 
     def recursivePoper_licor(self):
 
-        if self.dateTime_licor[0] < self.currentTime - timedelta(minutes=10) :
+        if self.dateTime_licor[0] < self.currentTime - self.lookBack  :
             self.co2_licor.pop(0) #remove oldest
             self.h2o_licor.pop(0) #remove oldest
             self.dateTime_licor.pop(0) #remove oldest 
@@ -323,9 +325,9 @@ class Graph:
         self.h2oNow_licor   = float(dataIn['H2O'])
         self.ctNow_licor    =  datetime.strptime(dataIn['dateTime'],'%Y-%m-%d %H:%M:%S.%f').replace(tzinfo=tz.tzutc()).astimezone(tz.gettz())
 
-        if self.initRunLicor:
+        if self.initRun_licor:
             if (self.co2Now_licor>0.00):
-                    self.initRunLicor = False
+                    self.initRun_licor = False
                     self.licorUpdater()
         else: 
             if (self.co2Now_licor>0.00 and self.ctNow_licor>self.dateTime_licor[-1] ):
@@ -336,7 +338,7 @@ class Graph:
 
     def recursivePoper_2bbc(self):
 
-        if self.dateTime_2bbc[0] < self.currentTime - timedelta(minutes=10) :
+        if self.dateTime_2bbc[0] < self.currentTime - self.lookBack  :
             self.bc_2bbc.pop(0) #remove oldest
             self.dateTime_2bbc.pop(0) #remove oldest 
             self.recursivePoper_2bbc()
@@ -346,7 +348,7 @@ class Graph:
     def t2bbcUpdater(self):
 
         self.bc_2bbc.append(self.bcNow_2bbc)
-        self.dateTime_2bbc.append(self.ctNow_2bbc);
+        self.dateTime_2bbc.append(self.ctNow_2bbc)
         self.curveBC_2bbc.setData(x=[x.timestamp() for x in self.dateTime_2bbc],\
                         y=self.bc_2bbc,pen=pg.mkPen((150,150,150), width=1,name = "BC"))
 
@@ -359,7 +361,7 @@ class Graph:
 
         if self.initRun_2bbc:
             if (self.bcNow_2bbc>-100.00):
-                    self.initRun2bbc = False
+                    self.initRun_2bbc = False
                     self.t2bbcUpdater()
         else: 
             if (self.bcNow_2bbc>-100.00 and self.ctNow_2bbc>self.dateTime_2bbc[-1] ):
@@ -369,7 +371,7 @@ class Graph:
     # FOR 2BNO
     def recursivePoper_2bno(self):
 
-        if self.dateTime_2bno[0] < self.currentTime - timedelta(minutes=10) :
+        if self.dateTime_2bno[0] < self.currentTime - self.lookBack  :
             self.no_2bno.pop(0) #remove oldest
             self.no2_2bno.pop(0) #remove oldest
             self.nox_2bno.pop(0) #remove oldest
@@ -402,9 +404,9 @@ class Graph:
         self.noxNow_2bno  = float(dataIn['NOX'])
         self.ctNow_2bno   =  datetime.strptime(dataIn['dateTime'],'%Y-%m-%d %H:%M:%S.%f').replace(tzinfo=tz.tzutc()).astimezone(tz.gettz())
 
-        if self.initRun2bno:
+        if self.initRun_2bno:
             if (self.noNow_2bno>-100.00):
-                    self.initRun2bno = False
+                    self.initRun_2bno = False
                     self.t2bnoUpdater()
         else: 
             if (self.noNow_2bno>-100.00 and self.ctNow_2bno>self.dateTime_2bno[-1] ):
@@ -414,8 +416,7 @@ class Graph:
     # For 2BO3
 
     def recursivePoper_2bo3(self):
-
-        if self.dateTime_2bo3[0] < self.currentTime - timedelta(minutes=10) :
+        if self.dateTime_2bo3[0] < self.currentTime - self.lookBack  :
             self.o3_2bo3.pop(0) #remove oldest
             self.dateTime_2bo3.pop(0) #remove oldest 
             self.recursivePoper_2bo3()
@@ -425,7 +426,7 @@ class Graph:
     def t2bo3Updater(self):
         self.o3_2bo3.append(self.o3Now_2bo3)
         self.dateTime_2bo3.append(self.ctNow_2bo3)
-        self.curveBC_2bo3.setData(x=[x.timestamp() for x in self.dateTime_2bo3],\
+        self.curveO3_2bo3.setData(x=[x.timestamp() for x in self.dateTime_2bo3],\
                         y=self.o3_2bo3,pen=pg.mkPen('b', width=1,name = "Ozone"))
 
 
@@ -436,7 +437,7 @@ class Graph:
 
         if self.initRun_2bo3:
             if (self.o3Now_2bo3>-100.00):
-                    self.initRun2bo3 = False
+                    self.initRun_2bo3 = False
                     self.t2bo3Updater()
         else: 
             if (self.o3Now_2bo3>-100.00 and self.ctNow_2bo3>self.dateTime_2bo3[-1] ):
@@ -447,7 +448,7 @@ class Graph:
 
     def recursivePoper_np2(self):
 
-        if self.dateTime_np2[0] < self.currentTime - timedelta(minutes=10) :
+        if self.dateTime_np2[0] < self.currentTime - self.lookBack  :
             self.np_np2.pop(0) #remove oldest
             self.dateTime_np2.pop(0) #remove oldest 
             self.recursivePoper_np2()
