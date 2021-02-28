@@ -474,7 +474,7 @@ class Graph:
             return 
 
     def np2Updater(self):
-        self.np_np2.append(self.o3Now_2bo3)
+        self.np_np2.append(self.ctNow_np2)
         self.dateTime_np2.append(self.ctNow_np2)
         self.curveNP_np2.setData(x=[x.timestamp() for x in self.dateTime_np2],\
                         y=self.np_np2,pen=pg.mkPen('y', width=1,name ="Nano Particles"))

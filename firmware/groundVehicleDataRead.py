@@ -20,7 +20,7 @@ mqttPort            = mD.mqttPort
 mqttBroker          = mD.mqttBroker
 mqttCredentialsFile = mD.mqttCredentialsFile
 sensorNodesFile     = mD.sensorNodesFile
-
+tlsCert             = mD.tlsCert
 
 # For mqtt 
 credentials     = yaml.load(open(mqttCredentialsFile))
@@ -32,7 +32,7 @@ mqttUN       = credentials['mqtt']['username']
 mqttPW       = credentials['mqtt']['password'] 
 transmitters = transmitDetail['nodes']
 sensors      = transmitDetail['sensors']
-tlsCert     = "ca-certificates.crt"  # Put here the path of your TLS cert
+
 decoder = json.JSONDecoder(object_pairs_hook=collections.OrderedDict)
 
 # The callback for when the client receives a CONNACK response from the server.

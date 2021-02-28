@@ -3,6 +3,29 @@ from getmac import get_mac_address
 import serial.tools.list_ports
 import yaml
 
+
+# Change Accordingly  
+dataFolderMQTTReference   = "/home/teamlary/mintsData/referenceMQTT"  # The path of your MQTT Reference Data 
+dataFolderMQTT            = "/home/teamlary/mintsData/rawMQTT"        # The path of your MQTT Raw Data 
+tlsCert                   = "/etc/ssl/certs/ca-certificates.crt"     # The path of your TLS cert
+
+
+#  -------------------------- 
+
+latestOn                  = False
+
+# For MQTT 
+mqttOn                    = True
+mqttCredentialsFile      = 'mintsXU4/credentials.yml'
+sensorNodesFile          = 'sensorNodes.yml'
+
+mqttBroker               = "mqtt.circ.utdallas.edu"
+mqttPort                 = 8883  # Secure port
+senderNodes              = yaml.load(open(sensorNodesFile))
+
+
+
+
 def findMacAddress():
     macAddress= get_mac_address(interface="eth0")
     if (macAddress!= None):
@@ -19,23 +42,11 @@ def findMacAddress():
     return "xxxxxxxx"
 
 
-# Change Accordingly  
-dataFolderMQTTReference   = "/home/teamlary/mintsData/referenceMQTT"
-dataFolderMQTT            = "/home/teamlary/mintsData/rawMQTT"
+
 
 
 macAddress                = findMacAddress()
-latestOn                  = False
-mqttOn                    = True
 
-
-# For MQTT 
-mqttCredentialsFile      = 'mintsXU4/credentials.yml'
-sensorNodesFile          = 'sensorNodes.yml'
-
-mqttBroker               = "mqtt.circ.utdallas.edu"
-mqttPort                 = 8883  # Secure port
-senderNodes              = yaml.load(open(sensorNodesFile))
 
 print()
 print("----MINTS Definitions-----")

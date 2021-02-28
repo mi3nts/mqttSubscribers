@@ -8,19 +8,15 @@ import time
 import paho.mqtt.client as mqttClient
 import yaml
 from mintsXU4 import mintsDefinitions as mD
-
 import ssl
 
-# dataFolder          = mD.dataFolder
-# dataFolderReference = mD.dataFolderReference
-
-macAddress          = mD.macAddress
-mqttPort            = mD.mqttPort
-mqttBroker          = mD.mqttBroker
-dataFolderMQTT = mD.dataFolderMQTT
-mqttCredentialsFile = mD.mqttCredentialsFile
+macAddress              = mD.macAddress
+mqttPort                = mD.mqttPort
+mqttBroker              = mD.mqttBroker
+dataFolderMQTT          = mD.dataFolderMQTT
+mqttCredentialsFile     = mD.mqttCredentialsFile
 dataFolderMQTTReference = mD.dataFolderMQTTReference
-
+tlsCert                 = mD.tlsCert
 
 # FOR MQTT 
 credentials = yaml.load(open(mqttCredentialsFile))
@@ -29,7 +25,7 @@ broker      = mqttBroker
 port        = mqttPort # Secure port
 mqttUN      = credentials['mqtt']['username']  
 mqttPW      = credentials['mqtt']['password'] 
-tlsCert     = "/etc/ssl/certs/ca-certificates.crt"  # Put here the path of your TLS cert
+
 mqtt_client = mqttClient.Client()
 
 def on_connect(client, userdata, flags, rc):
