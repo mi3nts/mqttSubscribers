@@ -14,7 +14,7 @@ import ssl
 from mintsXU4 import mintsSensorReader as mSR
 from mintsXU4 import mintsDefinitions as mD
 from mintsXU4 import mintsLatest as mL
-
+import sys
 
 mqttPort            = mD.mqttPort
 mqttBroker          = mD.mqttBroker
@@ -53,22 +53,28 @@ def on_message(client, userdata, msg):
     print(" - - - MINTS DATA RECEIVED - - - ")
     print()
     # print(msg.topic+":"+str(msg.payload))
-    [nodeID,sensorID ] = msg.topic.split('/')
-    sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
-    if sensorID== "FRG001":
-        dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S')
-    else:
-        dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S.%f')
-    writePath = mSR.getWritePathMQTTReference(nodeID,sensorID,dateTime)
-    exists    = mSR.directoryCheck(writePath)
-    sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
-    print("Writing MQTT Data")
-    print(writePath)
-    mSR.writeCSV2(writePath,sensorDictionary,exists)
-    mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
-    print("Node ID   :" + nodeID)
-    print("Sensor ID :" + sensorID)
-    print("Data      : " + str(sensorDictionary))
+    try:
+        [nodeID,sensorID ] = msg.topic.split('/')
+        sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
+        print("Node ID   :" + nodeID)
+        print("Sensor ID :" + sensorID)
+        print("Data      : " + str(sensorDictionary))
+        
+        if sensorID== "FRG001":
+            dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S')
+        else:
+            dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S.%f')
+        writePath = mSR.getWritePathMQTTReference(nodeID,sensorID,dateTime)
+        exists    = mSR.directoryCheck(writePath)
+        sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
+        print("Writing MQTT Data")
+        print(writePath)
+        mSR.writeCSV2(writePath,sensorDictionary,exists)
+        mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
+
+    except: # catch *all* exceptions
+        e = sys.exc_info()[0]
+        print(e)
 
 
 # Create an MQTT client and attach our routines to it.
