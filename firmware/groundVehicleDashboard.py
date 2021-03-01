@@ -63,6 +63,10 @@ class Graph:
         ## Frog Histogram Plot 
         self.p2_frog = self.win.addPlot(title="Fidas® Frog Particle Counts")
         self.curveHistogram_frog = self.p2_frog.plot()
+        self.p2_frog.setLabels(
+            left="Bin Counts",
+            bottom="Bin #") 
+
 
         # Legend           
         self.legendHist_frog = pg.LegendItem(offset=(0., .5))
@@ -90,7 +94,7 @@ class Graph:
         
         self.p1_2bno.showGrid(x=True, y=True)
         self.p1_2bno.setLabels(
-            left="NO/NO2/NOx Levels (μg/m3)",
+            left="NO/NO2/NOx Levels (ppb)",
             bottom="Date Time (Local Time)") 
 
         # Legend 
@@ -140,7 +144,7 @@ class Graph:
         
         self.p1_2bo3.showGrid(x=True, y=True)
         self.p1_2bo3.setLabels(
-            left="O3 (μg/m3)",
+            left="O3 (ppbv)",
             bottom="Date Time (Local Time)") 
 
         # Legend 
@@ -167,7 +171,7 @@ class Graph:
         
         self.p1_licor.showGrid(x=True, y=True)
         self.p1_licor.setLabels(
-            left="CO2 (μg/m3)",
+            left="CO2 (ppm)",
             bottom="Date Time (Local Time)") 
 
         # Legend 
@@ -181,7 +185,7 @@ class Graph:
         
         self.p2_licor.showGrid(x=True, y=True)
         self.p2_licor.setLabels(
-            left="H20 (μg/m3)",
+            left="H20 (mmol/mol)",
             bottom="Date Time (Local Time)") 
 
         # Legend 
@@ -284,6 +288,8 @@ class Graph:
                         float(dataIn['binCount80']),float(dataIn['binCount81']) ,float(dataIn['binCount82']),float(dataIn['binCount83']),float(dataIn['binCount84']),\
                         float(dataIn['binCount85']),float(dataIn['binCount86']) ,float(dataIn['binCount87']),float(dataIn['binCount88']),float(dataIn['binCount89']),\
                         float(dataIn['binCount90']),float(dataIn['binCount91']) ,float(dataIn['binCount92']),float(dataIn['binCount93'])]
+        self.binsNow_frog  = [(i > 0) * i for i in self.binsNow_frog]
+
         self.ctNow_frog =  datetime.strptime(dataIn['dateTime'],'%Y-%m-%d %H:%M:%S').replace(tzinfo=tz.tzutc()).astimezone(tz.gettz())
 
         if self.initRun_frog:
@@ -474,7 +480,7 @@ class Graph:
             return 
 
     def np2Updater(self):
-        self.np_np2.append(self.ctNow_np2)
+        self.np_np2.append(self.npNow_np2)
         self.dateTime_np2.append(self.ctNow_np2)
         self.curveNP_np2.setData(x=[x.timestamp() for x in self.dateTime_np2],\
                         y=self.np_np2,pen=pg.mkPen('y', width=1,name ="Nano Particles"))
