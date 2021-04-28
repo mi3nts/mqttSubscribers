@@ -1,0 +1,18 @@
+
+nodes:
+  - MOCKID
+
+sensors:
+  - 2B-BC
+  - 2B-NOX
+  - 2B-O3
+  - GPSGPGGA1
+  - GPSGPGGA2 
+  - GPSGPGGA3
+  - GPSGPRMC1
+  - GPSGPRMC2
+  - GPSGPRMC3
+  - LICOR
+  - NP2
+  - FRG001
+

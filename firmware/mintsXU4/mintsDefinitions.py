@@ -18,6 +18,7 @@ latestOn                  = False
 mqttOn                    = True
 mqttCredentialsFile      = 'mintsXU4/credentials.yml'
 sensorNodesFile          = 'sensorNodes.yml'
+mockNodesFile            = 'sensorNodesMock.yml'
 
 mqttBroker               = "mqtt.circ.utdallas.edu"
 mqttPort                 = 8883  # Secure port

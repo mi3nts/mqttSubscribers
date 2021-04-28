@@ -83,7 +83,16 @@ def writeMQTTLatest(sensorDictionary,sensorName):
     
     return True
     
+def writeMQTTLatestMock(sensorDictionary,sensorName):
 
+    if connect(mqtt_client, mqttUN, mqttPW, broker, port):
+        try:
+            mqtt_client.publish("MOCKID/"+sensorName,json.dumps(sensorDictionary))
+
+        except Exception as e:
+            print("[ERROR] Could not publish data, error: {}".format(e))
+    
+    return True
 
 def writeJSONLatest(sensorDictionary,sensorName):
     directoryIn  = dataFolder+"/"+macAddress+"/"+sensorName+".json"
