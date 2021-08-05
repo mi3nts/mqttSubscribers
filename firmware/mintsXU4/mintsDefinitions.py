@@ -18,6 +18,7 @@ latestOn                  = False
 mqttOn                    = True
 mqttCredentialsFile      = 'mintsXU4/credentials.yml'
 sensorNodesFile          = 'sensorNodes.yml'
+droneFile                = 'drone.yml'
 mockNodesFile            = 'sensorNodesMock.yml'
 
 mqttBroker               = "mqtt.circ.utdallas.edu"
