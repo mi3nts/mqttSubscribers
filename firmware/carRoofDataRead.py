@@ -1,5 +1,3 @@
-
-
 # MQTT Client demo
 # Continuously monitor two different MQTT topics for data,
 # check if the received data matches two predefined 'commands'
@@ -19,12 +17,12 @@ import sys
 mqttPort            = mD.mqttPort
 mqttBroker          = mD.mqttBroker
 mqttCredentialsFile = mD.mqttCredentialsFile
-droneFile           = mD.droneFile
+carRoofFile         = mD.carRoofFile
 tlsCert             = mD.tlsCert
 
 # For mqtt 
 credentials     = yaml.load(open(mqttCredentialsFile))
-transmitDetail  = yaml.load(open(droneFile))
+transmitDetail  = yaml.load(open(carRoofFile))
 connected    = False  # Stores the connection status
 broker       = mqttBroker  
 port         = mqttPort  # Secure port
@@ -53,28 +51,32 @@ def on_message(client, userdata, msg):
     print(" - - - MINTS DATA RECEIVED - - - ")
     print()
     # print(msg.topic+":"+str(msg.payload))
-    try:
-        [nodeID,sensorID ] = msg.topic.split('/')
-        sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
-        print("Node ID   :" + nodeID)
-        print("Sensor ID :" + sensorID)
-        print("Data      : " + str(sensorDictionary))
+    # try:
+    [nodeID,sensorID ] = msg.topic.split('/')
+    sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
+    print("Node ID   :" + nodeID)
+    print("Sensor ID :" + sensorID)
+    print("Data      : " + str(sensorDictionary))
         
-        if sensorID== "FRG001":
-            dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S')
-        else:
-            dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S.%f')
-        writePath = mSR.getWritePathMQTT(nodeID,sensorID,dateTime)
-        exists    = mSR.directoryCheck(writePath)
-        sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
-        print("Writing MQTT Data")
-        print(writePath)
-        mSR.writeCSV2(writePath,sensorDictionary,exists)
-        mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
+    if sensorID== "GPZDA":
+        dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S')
+    else:
+        print("---------------")
+        dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S.%f')
 
-    except Exception as e:
-        print("[ERROR] Could not publish data, error: {}".format(e))
 
+    print(dateTime)
+    writePath = mSR.getWritePathMQTT(nodeID,sensorID,dateTime)
+    print("writePath:" + writePath)
+    exists    = mSR.directoryCheck(writePath)
+    sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
+    print("Writing MQTT Data")
+    print(writePath)
+    mSR.writeCSV2(writePath,sensorDictionary,exists)
+    mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
+   
+    # except Exception as e:
+    #     print("[ERROR] Could not publish data, error: {}".format(e))
 
 
 # Create an MQTT client and attach our routines to it.

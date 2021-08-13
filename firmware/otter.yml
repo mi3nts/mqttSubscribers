@@ -1,0 +1,34 @@
+
+nodes:
+  - 001e0610c2ed 
+
+sensors:
+  - IP
+  - OPCN3
+  - SCD30
+  - BME280 
+  - MGS001
+  - HM3301
+  - GPSGPGGA2
+  - GPSGPRMC2  
+  - AS7262
+  - TSL2591
+  - VEML6075
+  - TMG3993
+  - SI114X
+  - GL001
+  - GUV001
+  - APDS9002
+  - LIBRAD
+  - TB108L  # For All of XU4 
+  - HCHDT
+  - WIMWV
+  - GPGGA
+  - GPVTG
+  - GPZDA
+  - WIMDA
+  - YXXDR
+  - SEN0232 
+  - AS3935
+  - SKYCAM003
+  - MCAM 

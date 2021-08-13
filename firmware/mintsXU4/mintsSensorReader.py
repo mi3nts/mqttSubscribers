@@ -126,6 +126,77 @@ def sensorSend(sensorID,sensorData,dateTime):
 
 
 
+def GPVTGWrite(sensorData,dateTime):
+    dataOut    = sensorData.replace('*',',').split(',')
+    sensorName = "GPVTG"
+    dataLength = 10
+    gpsQuality = dataOut[6]
+
+    if(len(dataOut) ==(dataLength +1)):
+        sensorDictionary = OrderedDict([
+                ("dateTime"               ,str(dateTime)),
+        	    ("courseOGTrue"           ,dataOut[1]),
+            	("relativeToTN"           ,dataOut[2]),
+	            ("courseOGMagnetic"       ,dataOut[3]),
+                ("relativeToMN"           ,dataOut[4]),
+                ("speedOverGroundKnots"   ,dataOut[5]),
+            	("SOGKUnits"              ,dataOut[6]),
+                ("speedOverGroundKMPH"    ,dataOut[7]),
+            	("SOGKMPHUnits"           ,dataOut[8]),
+                ("mode"                   ,dataOut[9]),
+                ("checkSum"               ,dataOut[10]),
+             ])
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
+def GPZDAWrite(sensorData,dateTime):
+    dataOut    = sensorData.replace('*',',').split(',')
+    sensorName = "GPZDA"
+    dataLength = 7
+    #
+    #
+
+    if(len(dataOut) ==(dataLength +1)):
+        year      = int(dataOut[4])
+        month     = int(dataOut[3])
+        day       = int(dataOut[2])
+        hour      = int(dataOut[1][:2])
+        minute    = int(dataOut[1][2:4])
+        second    = int(dataOut[1][4:6])
+        dateTime  = datetime.datetime(year, month,day, hour, minute,second)
+
+        sensorDictionary = OrderedDict([
+                ("dateTime"              ,str(dateTime)),
+        	    ("UTCTimeStamp"          ,dataOut[1]),
+            	("UTCDay"                ,dataOut[2]),
+	            ("UTCMonth"              ,dataOut[3]),
+        	    ("UTCYear"               ,dataOut[4]),
+                ("localHours"            ,dataOut[5]),
+          	    ("localMinutes"          ,dataOut[6]),
+                ("checkSum"              ,dataOut[7])
+        	     ])
+
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+        return True,dateTime;
+
+    return False,"xxxx"
+
+
+
+def TIROTWrite(sensorData,dateTime):
+    dataOut    = sensorData.replace('*',',').split(',')
+    sensorName = "TIROT"
+    dataLength = 3
+
+    if(len(dataOut) ==(dataLength +1)):
+        sensorDictionary = OrderedDict([
+                ("dateTime"                ,str(dateTime)),
+        	    ("rateOfTurn"              ,dataOut[1]),
+                ("validity"                ,dataOut[2]),
+                ("checkSum"                ,dataOut[3])
+        	     ])
+
+        sensorFinisher(dateTime,sensorName,sensorDictionary)
+
 
 
 
@@ -743,7 +814,10 @@ def writeCSV(reader,keys,outputPath):
 def directoryCheck(outputPath):
     exists = os.path.isfile(outputPath)
     directoryIn = os.path.dirname(outputPath)
+    print(directoryIn)
+
     if not os.path.exists(directoryIn):
+        print("Creating Directory")
         os.makedirs(directoryIn)
     return exists
 

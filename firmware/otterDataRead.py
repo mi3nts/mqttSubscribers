@@ -20,11 +20,12 @@ mqttPort            = mD.mqttPort
 mqttBroker          = mD.mqttBroker
 mqttCredentialsFile = mD.mqttCredentialsFile
 droneFile           = mD.droneFile
+otterFile           = mD.otterFile
 tlsCert             = mD.tlsCert
 
 # For mqtt 
 credentials     = yaml.load(open(mqttCredentialsFile))
-transmitDetail  = yaml.load(open(droneFile))
+transmitDetail  = yaml.load(open(otterFile))
 connected    = False  # Stores the connection status
 broker       = mqttBroker  
 port         = mqttPort  # Secure port
@@ -72,9 +73,9 @@ def on_message(client, userdata, msg):
         mSR.writeCSV2(writePath,sensorDictionary,exists)
         mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
 
-    except Exception as e:
-        print("[ERROR] Could not publish data, error: {}".format(e))
-
+    except: # catch *all* exceptions
+        e = sys.exc_info()[0]
+        print(e)
 
 
 # Create an MQTT client and attach our routines to it.

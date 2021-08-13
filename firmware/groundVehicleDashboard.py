@@ -67,12 +67,10 @@ class Graph:
             left="Bin Counts",
             bottom="Bin #") 
 
-
         # Legend           
         self.legendHist_frog = pg.LegendItem(offset=(0., .5))
         self.legendHist_frog.setParentItem(self.p2_frog.graphicsItem())
         self.legendHist_frog.addItem(self.curveHistogram_frog, 'Histogram Bins')
-
         self.win.nextRow()
 
         ### 2BNO- Graphs
@@ -216,8 +214,6 @@ class Graph:
         self.legendNP_np2 = pg.LegendItem(offset=(0., .5))
         self.legendNP_np2.setParentItem(self.p1_np2.graphicsItem())
         self.legendNP_np2.addItem(self.curveNP_np2, 'Nanoes Partector HV')
-
-
 
         ### Final Rights 
         timer = QtCore.QTimer()#to create a thread that calls a function at intervals

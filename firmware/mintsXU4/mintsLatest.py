@@ -8,6 +8,7 @@ import time
 import paho.mqtt.client as mqttClient
 import yaml
 from mintsXU4 import mintsDefinitions as mD
+from mintsXU4 import mintsSensorReader as mSR
 import ssl
 
 macAddress              = mD.macAddress
@@ -99,28 +100,46 @@ def writeJSONLatest(sensorDictionary,sensorName):
     print(directoryIn)
     try:
         with open(directoryIn,'w') as fp:
+            mSR.directoryCheck(directoryIn)
             json.dump(sensorDictionary, fp)
 
-    except:
+    except Exception as e:
+        print("[ERROR] Could not publish data, error: {}".format(e))
         print("Json Data Not Written")
 
 def writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID):
+    directoryIn  = dataFolderMQTT+"/"+nodeID+"/"+sensorID+".json"
+    print(directoryIn)
+    try:
+        with open(directoryIn,'w') as fp:
+            mSR.directoryCheck(directoryIn)
+            json.dump(sensorDictionary, fp)
+    except Exception as e:
+        print("[ERROR] Could not publish data, error: {}".format(e))
+        print("Json Data Not Written")
+
+def writeJSONLatestMQTTReference(sensorDictionary,nodeID,sensorID):
     directoryIn  = dataFolderMQTTReference+"/"+nodeID+"/"+sensorID+".json"
     print(directoryIn)
     try:
         with open(directoryIn,'w') as fp:
+            mSR.directoryCheck(directoryIn)
             json.dump(sensorDictionary, fp)
-    except:
+    except Exception as e:
+        print("[ERROR] Could not publish data, error: {}".format(e))
         print("Json Data Not Written")
+
 
 def writeJSONLatestReference(sensorDictionary,sensorName):
     directoryIn  = dataFolderReference+"/"+macAddress+"/"+sensorName+".json"
     print(directoryIn)
     try:
         with open(directoryIn,'w') as fp:
+            mSR.directoryCheck(directoryIn)
             json.dump(sensorDictionary, fp)
 
     except:
+        print("[ERROR] Could not publish data, error: {}".format(e))
         print("Json Data Not Written")
 
 

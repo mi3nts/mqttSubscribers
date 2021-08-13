@@ -16,7 +16,7 @@ def mqttMocker(fileName,sensorName,delayIn):
     with open(fileName) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            # print(row)
+            # print(row)git 
             if(sensorName=="FRG001"):
                 row["dateTime"]  = datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
             else:

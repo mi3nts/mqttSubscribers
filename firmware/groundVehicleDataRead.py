@@ -70,7 +70,7 @@ def on_message(client, userdata, msg):
         print("Writing MQTT Data")
         print(writePath)
         mSR.writeCSV2(writePath,sensorDictionary,exists)
-        mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
+        mL.writeJSONLatestMQTTReference(sensorDictionary,nodeID,sensorID)
 
     except: # catch *all* exceptions
         e = sys.exc_info()[0]
