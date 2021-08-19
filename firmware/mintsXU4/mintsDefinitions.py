@@ -19,6 +19,7 @@ mqttOn                    = True
 mqttCredentialsFile      = 'mintsXU4/credentials.yml'
 sensorNodesFile          = 'sensorNodes.yml'
 droneFile                = 'drone.yml'
+centralNodesFile         = 'centralNodes.yml'
 otterFile                = 'otter.yml'
 carRoofFile              = 'carRoof.yml'
 mockNodesFile            = 'sensorNodesMock.yml'
