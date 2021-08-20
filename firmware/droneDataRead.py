@@ -22,14 +22,14 @@ mqttCredentialsFile = mD.mqttCredentialsFile
 droneFile           = mD.droneFile
 tlsCert             = mD.tlsCert
 
-# For mqtt 
+# For mqtt
 credentials     = yaml.load(open(mqttCredentialsFile))
 transmitDetail  = yaml.load(open(droneFile))
 connected    = False  # Stores the connection status
-broker       = mqttBroker  
+broker       = mqttBroker
 port         = mqttPort  # Secure port
-mqttUN       = credentials['mqtt']['username'] 
-mqttPW       = credentials['mqtt']['password'] 
+mqttUN       = credentials['mqtt']['username']
+mqttPW       = credentials['mqtt']['password']
 transmitters = transmitDetail['nodes']
 sensors      = transmitDetail['sensors']
 
@@ -59,7 +59,7 @@ def on_message(client, userdata, msg):
         print("Node ID   :" + nodeID)
         print("Sensor ID :" + sensorID)
         print("Data      : " + str(sensorDictionary))
-        
+
         if sensorID== "FRG001":
             dateTime  = datetime.datetime.strptime(sensorDictionary["dateTime"], '%Y-%m-%d %H:%M:%S')
         else:
@@ -69,7 +69,7 @@ def on_message(client, userdata, msg):
         sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
         print("Writing MQTT Data")
         print(writePath)
-        mSR.writeCSV2(writePath,sensorDictionary,exists)
+        # mSR.writeCSV2(writePath,sensorDictionary,exists)
         mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
 
     except Exception as e:

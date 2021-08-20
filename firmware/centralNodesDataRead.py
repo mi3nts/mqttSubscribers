@@ -69,7 +69,7 @@ def on_message(client, userdata, msg):
         sensorDictionary = decoder.decode(msg.payload.decode("utf-8","ignore"))
         print("Writing MQTT Data")
         print(writePath)
-        mSR.writeCSV2(writePath,sensorDictionary,exists)
+        #mSR.writeCSV2(writePath,sensorDictionary,exists)
         mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
 
     except Exception as e:
