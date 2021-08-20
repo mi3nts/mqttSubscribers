@@ -4,7 +4,7 @@
 source env/bin/activate
 cd firmware
 python groundVehicleDataRead.py & 
-sleep 5 
+sleep 10 
 python otterDataRead.py
-sleep 5 
+sleep 10 
 python centralNodesDataRead.py
