@@ -1,9 +1,9 @@
 
 nodes:
-  - 001e06318c91
+  - 001e06318c91  # joppa
   - 001e06373724     
   - 001e0637371e
-  - 001e06373996
+  - 001e06373996  # lab demo node
 sensors:
   - IP
   - OPCN3
