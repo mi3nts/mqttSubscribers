@@ -1,12 +1,16 @@
 
 nodes:
-  - 001e06318c91
+  - 001e06318c91  # joppa
   - 001e06373724     
   - 001e0637371e
+<<<<<<< HEAD
   - 001e06373996
   - 00044be5fc9d
 
   
+=======
+  - 001e06373996  # lab demo node
+>>>>>>> b99383a50026e12230eab9f4c7cfed1725e210f2
 sensors:
   - IP
   - OPCN3
