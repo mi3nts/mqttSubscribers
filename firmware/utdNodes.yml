@@ -1,0 +1,56 @@
+
+nodes:
+  - 001e06305a12
+  - 001e06323a12
+  - 001e06318cd1
+  - 001e06305a61
+  - 001e06323a05
+  - 001e06305a57
+  - 001e063059c2
+  - 001e06318c28
+  - 001e06305a6b
+  - 001e063239e3
+  - 001e06305a6c
+  - 001e063239e6
+  - 001e06305a0a
+  - 001e06318cee
+  - 001e06318cf1
+  - 001e063059c1
+  - 001e063239e4
+  - 001e06323952
+  - 001e06305a2c
+  - 001e06323a06
+
+sensors:
+  - IP
+  - OPCN3
+  - SCD30
+  - BME280 
+  - MGS001
+  - HM3301
+  - GPSGPGGA2
+  - GPSGPRMC2  
+  - AS7262
+  - TSL2591
+  - VEML6075
+  - TMG3993
+  - SI114X
+  - GL001
+  - GUV001
+  - APDS9002
+  - LIBRAD
+  - TB108L  # For All of XU4 
+  - HCHDT
+  - WIMWV
+  - GPGGA
+  - GPVTG
+  - GPZDA
+  - WIMDA
+  - YXXDR
+  - SEN0232 
+  - AS3935
+  - SKYCAM003
+  - MCAM 
+  - IPS7100
+  - BME680
+

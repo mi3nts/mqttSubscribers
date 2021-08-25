@@ -22,6 +22,7 @@ droneFile                = 'drone.yml'
 centralNodesFile         = 'centralNodes.yml'
 otterFile                = 'otter.yml'
 carRoofFile              = 'carRoof.yml'
+utdNodesFile             = 'utdNodes.yml'
 mockNodesFile            = 'sensorNodesMock.yml'
 
 mqttBroker               = "mqtt.circ.utdallas.edu"
@@ -45,7 +46,6 @@ def findMacAddress():
         return macAddress.replace(":","")
 
     return "xxxxxxxx"
-
 
 
 
