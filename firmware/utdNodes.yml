@@ -49,6 +49,7 @@ sensors:
   - YXXDR
   - SEN0232 
   - AS3935
+  - SKYCAM_002
   - SKYCAM003
   - MCAM 
   - IPS7100

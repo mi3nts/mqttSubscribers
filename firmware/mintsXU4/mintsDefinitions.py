@@ -24,7 +24,6 @@ otterFile                = 'otter.yml'
 carRoofFile              = 'carRoof.yml'
 utdNodesFile             = 'utdNodes.yml'
 mockNodesFile            = 'sensorNodesMock.yml'
-
 mqttBroker               = "mqtt.circ.utdallas.edu"
 mqttPort                 = 8883  # Secure port
 senderNodes              = yaml.load(open(sensorNodesFile))
@@ -47,11 +46,7 @@ def findMacAddress():
 
     return "xxxxxxxx"
 
-
-
-
 macAddress                = findMacAddress()
-
 
 print()
 print("----MINTS Definitions-----")
