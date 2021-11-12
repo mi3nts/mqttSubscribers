@@ -1,0 +1,21 @@
+
+
+portIDs:
+  - portID: 15
+    sensor: "IPS7100"
+    minMax: "max"
+  - portID: 21
+    sensor: "BME280"
+    minMax: "max"
+  - portID: 33
+    sensor: "SCD30"
+    minMax: "max"
+  - portID: 31
+    sensor: "MGS001"
+    minMax: "max"
+  - portID: 3
+    sensor: "INA219Duo"
+    minMax: "max"
+  - portID: 5
+    sensor: "GPGGALR"
+    minMax: "max"

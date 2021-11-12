@@ -814,7 +814,7 @@ def writeCSV(reader,keys,outputPath):
 def directoryCheck(outputPath):
     exists = os.path.isfile(outputPath)
     directoryIn = os.path.dirname(outputPath)
-    print(directoryIn)
+    # print(directoryIn)
 
     if not os.path.exists(directoryIn):
         print("Creating Directory")
@@ -838,7 +838,6 @@ def gainDirectoryInfo(dailyDownloadLocation):
         directoryFiles.extend(filenames)
 
     return directoryPaths,directoryNames,directoryFiles;
-
 
 def getWritePathMQTT(nodeID,labelIn,dateTime):
     #Example  : MINTS_0061_OOPCN3_2019_01_04.csv

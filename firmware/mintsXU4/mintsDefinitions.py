@@ -16,17 +16,23 @@ latestOn                  = False
 
 # For MQTT 
 mqttOn                    = True
-mqttCredentialsFile      = 'mintsXU4/credentials.yml'
+mqttCredentialsFile       = 'mintsXU4/credentials.yml'
+mqttLoRaCredentialsFile   = 'mintsXU4/loRacredentials.yml'
+
+
 sensorNodesFile          = 'sensorNodes.yml'
 droneFile                = 'drone.yml'
 centralNodesFile         = 'centralNodes.yml'
+loRaNodesFile            = 'loRaNodes.yml'
 otterFile                = 'otter.yml'
 carRoofFile              = 'carRoof.yml'
 utdNodesFile             = 'utdNodes.yml'
 mockNodesFile            = 'sensorNodesMock.yml'
 mqttBroker               = "mqtt.circ.utdallas.edu"
+mqttBrokerLoRa           = "mqtt.lora.trecis.cloud"
 mqttPort                 = 8883  # Secure port
-senderNodes              = yaml.load(open(sensorNodesFile))
+mqttPortLoRa             = 1883  # Secure port
+senderNodes              = yaml.load(open(sensorNodesFile),Loader=yaml.FullLoader)
 
 
 

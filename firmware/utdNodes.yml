@@ -24,6 +24,7 @@ nodes:
 sensors:
   - IP
   - OPCN3
+  - OPCN2
   - SCD30
   - BME280 
   - MGS001

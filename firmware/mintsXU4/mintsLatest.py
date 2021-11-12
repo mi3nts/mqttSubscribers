@@ -20,7 +20,7 @@ dataFolderMQTTReference = mD.dataFolderMQTTReference
 tlsCert                 = mD.tlsCert
 
 # FOR MQTT 
-credentials = yaml.load(open(mqttCredentialsFile))
+credentials = yaml.load(open(mqttCredentialsFile),Loader=yaml.FullLoader)
 connected   = False  # Stores the connection status
 broker      = mqttBroker
 port        = mqttPort # Secure port
@@ -109,7 +109,7 @@ def writeJSONLatest(sensorDictionary,sensorName):
 
 def writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID):
     directoryIn  = dataFolderMQTT+"/"+nodeID+"/"+sensorID+".json"
-    print(directoryIn)
+    # print(directoryIn)
     try:
         with open(directoryIn,'w') as fp:
             mSR.directoryCheck(directoryIn)
