@@ -815,11 +815,13 @@ def directoryCheck(outputPath):
     exists = os.path.isfile(outputPath)
     directoryIn = os.path.dirname(outputPath)
     # print(directoryIn)
-
-    if not os.path.exists(directoryIn):
-        print("Creating Directory")
-        os.makedirs(directoryIn)
-    return exists
+    try:
+        if not os.path.exists(directoryIn):
+            print("Creating Directory")
+            os.makedirs(directoryIn)
+        return exists
+    except Exception as e:
+        print("[ERROR] Could not publish data, error: {}".format(e))
 
 def csvWriter(writePath,organizedData,keys):
     with open(writePath,'w') as output_file:

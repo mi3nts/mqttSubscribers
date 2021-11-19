@@ -36,8 +36,6 @@ mqttPW       = credentials['mqtt']['password']
 
 decoder = json.JSONDecoder(object_pairs_hook=collections.OrderedDict)
 
-
-
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
     topic = "utd/lora/app/2/device/+/event/up"
@@ -45,16 +43,22 @@ def on_connect(client, userdata, flags, rc):
     print("Subscrbing to Topic: "+ topic)
 
 def on_message(client, userdata, msg):
-    print()
-    print(" - - - MINTS DATA RECEIVED - - - ")
-    dateTime,gatewayID,nodeID,sensorID,framePort,base16Data = mLR.loRaSummaryWrite(msg,portIDs)
-    print("Node ID         : " + nodeID)
-    print("Gateway ID      : " + gatewayID)
-    print("Sensor ID       : " + sensorID)
-    print("dateTime        : " + str(dateTime))
-    print("Base 16 Data    : " + base16Data)
-    mLR.sensorSendLoRa(dateTime,gatewayID,nodeID,sensorID,framePort,base16Data)
-   
+    try:
+        print()
+        print(" - - - MINTS DATA RECEIVED - - - ")
+        # print(msg.payload)
+        dateTime,gatewayID,nodeID,sensorID,framePort,base16Data = \
+            mLR.loRaSummaryWrite(msg,portIDs)
+        print("Node ID         : " + nodeID)
+        print("Gateway ID      : " + gatewayID)
+        print("Sensor ID       : " + sensorID)
+        print("Date Time       : " + str(dateTime))
+        print("Port ID         : " + str(framePort))
+        print("Base 16 Data    : " + base16Data)
+        mLR.sensorSendLoRa(dateTime,nodeID,sensorID,framePort,base16Data)
+    except Exception as e:
+        print("[ERROR] Could not publish data, error: {}".format(e))
+
 
 # Create an MQTT client and attach our routines to it.
 client = mqtt.Client()
