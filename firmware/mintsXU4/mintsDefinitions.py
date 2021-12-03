@@ -5,8 +5,10 @@ import yaml
 
 
 # Change Accordingly  
-dataFolderMQTTReference   = "/home/teamlary/mintsData/referenceMQTT"  # The path of your MQTT Reference Data 
-dataFolderMQTT            = "/home/teamlary/mintsData/rawMQTT"        # The path of your MQTT Raw Data 
+mintsDefinitions = yaml.load(open('mintsXU4/mintsDefinitions.yaml'),Loader=yaml.FullLoader)
+dataFolder       = mintsDefinitions['dataFolder']
+dataFolderMQTTReference   = mintsDefinitions['dataFolder'] + "/referenceMqtt"  # The path of your MQTT Reference Data 
+dataFolderMQTT            = mintsDefinitions['dataFolder'] + "/rawMqtt"        # The path of your MQTT Raw Data 
 tlsCert                   = "/etc/ssl/certs/ca-certificates.crt"     # The path of your TLS cert
 
 
