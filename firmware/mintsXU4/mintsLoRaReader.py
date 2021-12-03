@@ -17,7 +17,7 @@ import serial
 import datetime
 import os
 import csv
-import deepdish as dd
+#import deepdish as dd
 from mintsXU4 import mintsLatest as mL
 from mintsXU4 import mintsDefinitions as mD
 from mintsXU4 import mintsSensorReader as mSR
@@ -173,6 +173,7 @@ def PMLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
 def loRaWriteFinisher(nodeID,sensorID,dateTime,sensorDictionary):
     writePath = mSR.getWritePathMQTT(nodeID,sensorID,dateTime)
     exists    = mSR.directoryCheck(writePath)
+    print(writePath)	
     mSR.writeCSV2(writePath,sensorDictionary,exists)
     mL.writeJSONLatestMQTT(sensorDictionary,nodeID,sensorID)
     return;
