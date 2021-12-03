@@ -12,6 +12,7 @@ Contains codes which subscribes into MINTS mqtt data streams
   - Write down the folder in which you need the data to be stored
     
 eg: mintsDefinitions.yaml
+</br>
     ``` dataFolder : "/media/teamlary/teamlary3/air930/mintsData" ```
   
  
