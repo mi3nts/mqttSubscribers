@@ -10,7 +10,8 @@ Contains codes which subscribes into MINTS mqtt data streams
 - Create a yaml file for file location 
   - ```mqttSubscribers/firmware/mintsXU4/mintsDefinitions.yaml```
   - Write down the folder in which you need the data to be stored
-    eg: `mintsDefinitions.yaml`
+    
+eg: `mintsDefinitions.yaml`
     
     ```
     dataFolder : "/media/teamlary/teamlary3/air930/mintsData"
