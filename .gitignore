@@ -1,3 +1,4 @@
 *.yaml
 *credentials.yml
 *.crt
+*.pyc
