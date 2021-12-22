@@ -1,59 +1,53 @@
 
 nodes:
-  - 001e06318c91  # joppa
-  - 001e06373724     
+  - 001e06318c91  
+  - 00044bec2707
+  - 001e06373724
+  - 00044be6fea1 
   - 001e0637371e
+  - 00044be5fc9c
   - 001e06373996
   - 00044be5fc9d
-  - b827eb70fd4c
-  - 001e06318c91
-  - b827ebf74482
-  - 001e06373724
-  - b827eb52fc29
-  - 00044be6fea1
-  - 001e0637371e
-  - b827eb60cd60
-  - 001e06373996
   - 001e063739c7
   - 00044bec2ca6
   - 001e063739cd
+#  - 000000000001
   - 001e0636e547
+  - 00e04c680001
   - 001e06323a37
+  - 00044bebddd8
   - 001e0637372e
+  - 00e04c680190
   - 001e06318c9d
-  - 001e06300e7f
+  - 48b02d3d4f3d 
+   
   
   
 sensors:
-  - IP
-  - OPCN3
-  - SCD30
-  - BME280 
-  - MGS001
-  - HM3301
+  - APDS9002
+  - AS6272
+  - BME280
+  - BME680
+  - GL001
+  - GPGGA
   - GPSGPGGA2
   - GPSGPRMC2  
-  - AS7262
+  - GUV001
+  - HM3301
+  - IP
+  - IPS7100
+  - LIBRAD
+  - MGS001
+  - OPCN3
+  - SCD30
+  - SI114x
+  - TB108L
+  - TMG3993
   - TSL2591
   - VEML6075
-  - TMG3993
-  - SI114X
-  - GL001
-  - GUV001
-  - APDS9002
-  - LIBRAD
-  - TB108L  # For All of XU4 
-  - HCHDT
-  - WIMWV
-  - GPGGA
-  - GPVTG
-  - GPZDA
-  - WIMDA
-  - YXXDR
-  - SEN0232 
   - AS3935
+  - SEN02323
   - SKYCAM003
-  - MCAM 
-  - IPS7100
-  - BME680
-
+  - WIMDA
+  - WIMWV
+  - YXXDR
