@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # LoRa Nodes
 kill $(pgrep -f 'python3 loraNodesDataRead.py')
 sleep 1

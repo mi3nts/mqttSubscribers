@@ -1,0 +1,6 @@
+# m h  dom mon dow   command
+#@reboot cd /home/teamlary/mnt/teamlary1/gitHubRepos/palasDataStreamer/firmware && python3 mqttSubscriber.py
+@reboot cd /home/teamlary/mnt/teamlary1/gitHubRepos/mqttSubscribers/firmware && ./mintsGroundVehicle.sh
+@reboot cd /home/teamlary/mnt/teamlary1/gitHubRepos/mqttSubscribers/firmware && ./runDataReaders.sh
+30 09 * * * cd /home/teamlary/mnt/teamlary1/gitHubRepos/mqttSubscribers/firmware && ./runDataReaders.sh
+
