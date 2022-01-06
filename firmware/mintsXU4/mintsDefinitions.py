@@ -7,7 +7,7 @@ import yaml
 # Change Accordingly  
 mintsDefinitions = yaml.load(open('mintsXU4/mintsDefinitions.yaml'),Loader=yaml.FullLoader)
 dataFolder       = mintsDefinitions['dataFolder']
-dataFolderReference       = mintsDefinitions['dataFolder'] + "reference"
+dataFolderReference       = mintsDefinitions['dataFolder'] + "/reference"
 dataFolderMQTTReference   = mintsDefinitions['dataFolder'] + "/referenceMqtt"  # The path of your MQTT Reference Data 
 dataFolderMQTT            = mintsDefinitions['dataFolder'] + "/rawMqtt"        # The path of your MQTT Raw Data 
 tlsCert                   = "/etc/ssl/certs/ca-certificates.crt"     # The path of your TLS cert
