@@ -10,7 +10,7 @@ dataFolder       = mintsDefinitions['dataFolder']
 dataFolderReference       = mintsDefinitions['dataFolder'] + "/reference"
 dataFolderMQTTReference   = mintsDefinitions['dataFolder'] + "/referenceMqtt"  # The path of your MQTT Reference Data 
 dataFolderMQTT            = mintsDefinitions['dataFolder'] + "/rawMqtt"        # The path of your MQTT Raw Data 
-tlsCert                   = "/etc/ssl/certs/ca-certificates.crt"     # The path of your TLS cert
+tlsCert                   = "/mfs/io/groups/lary/certs/ca-certificates.crt"     # The path of your TLS cert
 
 
 #  -------------------------- 

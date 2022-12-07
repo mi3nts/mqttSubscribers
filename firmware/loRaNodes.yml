@@ -25,6 +25,9 @@ portIDs:
   - portID: 5
     sensor: "GPGGALR"
     minMax: "max"
+  - portID: 4
+    sensor: "INA219Mono"
+    minMax: "max"
   - portID: 3
     sensor: "INA219Duo"
     minMax: "max"

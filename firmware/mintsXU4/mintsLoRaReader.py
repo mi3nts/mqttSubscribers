@@ -47,6 +47,8 @@ def sensorSendLoRa(dateTime,nodeID,sensorID,framePort,base16Data):
         BME280LoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data)        
     if(sensorID=="SCD30"):
         SCD30LoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data) 
+    if(sensorID=="INA219Mono"):
+        INA219MonoLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data) 
     if(sensorID=="INA219Duo"):
         INA219DuoLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data) 
     if(sensorID=="MGS001"):
@@ -104,6 +106,26 @@ def SCD30LoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
     print(sensorDictionary)        
     loRaWriteFinisher(nodeID,sensorID,dateTime,sensorDictionary)
     return ;
+
+def INA219MonoLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
+    if(framePort == 4 and len(base16Data) ==40):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"    ,str(dateTime)), 
+        		("busVoltageBattery"   ,struct.unpack('<f',bytes.fromhex(base16Data[0:8]))[0]),
+                ("shuntVoltageSolar"   ,struct.unpack('<f',bytes.fromhex(base16Data[8:16]))[0]),
+            	("busVoltageSolar"     ,struct.unpack('<f',bytes.fromhex(base16Data[16:24]))[0]),
+                ("currentSolar"        ,struct.unpack('<f',bytes.fromhex(base16Data[24:32]))[0]),
+                ("powerSolar"          ,struct.unpack('<f',bytes.fromhex(base16Data[32:40]))[0]),
+          ])
+    print(sensorDictionary)        
+    loRaWriteFinisher(nodeID,sensorID,dateTime,sensorDictionary)
+    return ;
+
+
+
+
+
+
 def INA219DuoLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
     if(framePort == 3 and len(base16Data) ==64):
         sensorDictionary =  OrderedDict([
