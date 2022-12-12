@@ -1,6 +1,28 @@
-
-
 portIDs:
+  - portID: 1
+    sensor: "LoRaDefault"
+    minMax: "max"
+  - portID: 2
+    sensor: "PM"
+    minMax: "max"    
+  - portID: 3
+    sensor: "INA219Duo"
+    minMax: "max"
+  - portID: 4
+    sensor: "INA219Mono"
+    minMax: "max"
+  - portID: 5
+    sensor: "GPGGALR"
+    minMax: "max"
+  - portID: 6
+    sensor: "GPGGA"
+    minMax: "max"    
+  - portID: 7
+    sensor: "GPRMC"
+    minMax: "max" 
+  - portID: 8
+    sensor: "MacAD" 
+    minMax: "max" 
   - portID: 11
     sensor: "OPCN2"
     minMax: "max"
@@ -10,30 +32,33 @@ portIDs:
   - portID: 15
     sensor: "IPS7100"
     minMax: "max"
+  - portID: 17
+    sensor: "IPS7100CNR"
+    minMax: "max"   
+  - portID: 21
+    sensor: "BME280"
+    minMax: "max"   
   - portID: 23
     sensor: "BME680"
     minMax: "max"
-  - portID: 21
-    sensor: "BME280"
-    minMax: "max"
-  - portID: 33
-    sensor: "SCD30"
+  - portID: 25
+    sensor: "BME688CNR"
     minMax: "max"
   - portID: 31
     sensor: "MGS001"
     minMax: "max"
-  - portID: 5
-    sensor: "GPGGALR"
+  - portID: 33
+    sensor: "SCD30"
     minMax: "max"
-  - portID: 4
-    sensor: "INA219Mono"
-    minMax: "max"
-  - portID: 3
-    sensor: "INA219Duo"
-    minMax: "max"
-  - portID: 2
-    sensor: "PM"
-    minMax: "max"    
-  - portID: 1
-    sensor: "LoRaDefault"
+  - portID: 42
+    sensor: "MBCLR001"
+    minMax: "max"   
+  - portID: 43
+    sensor: "MBCLR002"
+    minMax: "max"       
+  - portID: 51
+    sensor: "AS7265X"
+    minMax: "max" 
+  - portID: 255
+    sensor: "UnknownSensor"
     minMax: "max"
