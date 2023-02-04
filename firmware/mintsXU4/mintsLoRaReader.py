@@ -63,10 +63,10 @@ def sensorSendLoRa(dateTime,nodeID,sensorID,framePort,base16Data):
         BME688CNRLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data)
     if(sensorID=="AS7265X"):
         AS7265XLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data)
-    if(sensorID=="GPRMC"):
-        GPRMCLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data)
-    if(sensorID=="GPGGA"):
-        GPGGALoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data)
+    if(sensorID=="GPRMCPL"):
+        GPRMCPLLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data)
+    if(sensorID=="GPGGAPL"):
+        GPGGAPLLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data)
     if(sensorID=="MBCLR001"):
         MBCLR001LoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data)
     if(sensorID=="MBCLR002"):
@@ -262,8 +262,8 @@ def MacADLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
     loRaWriteFinisher(nodeID,sensorID,dateTime,sensorDictionary)
     return ;    
 
-def GPGGALoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
-    if(framePort == 6 and len(base16Data) ==66) :
+def GPGGAPLLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
+    if(framePort == 106 and len(base16Data) ==66) :
         sensorDictionary =  OrderedDict([
                 ("dateTime"            ,str(dateTime)),
         		("hour"                ,struct.unpack('<B',bytes.fromhex(base16Data[0:2]))[0]),
@@ -281,8 +281,8 @@ def GPGGALoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
     loRaWriteFinisher(nodeID,sensorID,dateTime,sensorDictionary)
     return ;
 
-def GPRMCLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
-    if(framePort == 7 and len(base16Data) ==54) :
+def GPRMCPLLoRaWrite(dateTime,nodeID,sensorID,framePort,base16Data):
+    if(framePort == 107 and len(base16Data) ==54) :
         sensorDictionary =  OrderedDict([
                 ("dateTime"            ,str(dateTime)),
          		("year"                ,struct.unpack('<H',bytes.fromhex(base16Data[0:4]))[0]),
